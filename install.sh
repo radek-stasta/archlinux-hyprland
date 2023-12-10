@@ -15,12 +15,17 @@ sudo pacman -Syyu --noconfirm
 
 ### Hyprland ###
 # Install Hyprland
-sudo pacman -S hyprland-git nvidia-dkms qt5-wayland qt5ct libva libva-nvidia-driver-git --noconfirm
+sudo pacman -S hyprland-git nvidia-dkms qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers --noconfirm
 
 # Set GRUB parameters
 NVIDIA_GRUB="nvidia_drm.modeset=1"
 grep -q "$NVIDIA_GRUB" /etc/default/grub || sudo sed -i "s/quiet/quiet $NVIDIA_GRUB/" /etc/default/grub
-# sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# Set mkinitcpio
+NVIDIA_MKINIT="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+grep -q "$NVIDIA_MKINIT" /etc/mkinitcpio.conf || sudo sed -i "s/MODULES=(btrfs)/MODULES=(btrfs $NVIDIA_MKINIT)/" /etc/mkinitcpio.conf
+sudo mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initframs-custom.img
 
 # Symling Hyprland config
 rm -rf $CONFIG_PATH/hypr
