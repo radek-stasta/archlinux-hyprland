@@ -27,6 +27,10 @@ NVIDIA_MKINIT="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 grep -q "$NVIDIA_MKINIT" /etc/mkinitcpio.conf || sudo sed -i "s/MODULES=(btrfs)/MODULES=(btrfs $NVIDIA_MKINIT)/" /etc/mkinitcpio.conf
 sudo mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initframs-custom.img
 
+# Set nvidia.conf
+NVIDIA_CONF="options nvidia-drm modeset=1"
+grep -qxF "$NVIDIA_CONF" /etc/modprobe.d/nvidia.conf || sudo echo "$NVIDIA_CONF" >> /etc/modprobe.d/nvidia.conf
+
 # Symling Hyprland config
 rm -rf $CONFIG_PATH/hypr
 ln -sf $DOTFILES/hypr $CONFIG_PATH/hypr
