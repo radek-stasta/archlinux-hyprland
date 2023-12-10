@@ -29,7 +29,8 @@ sudo mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initframs-custom.
 
 # Set nvidia.conf
 NVIDIA_CONF="options nvidia-drm modeset=1"
-grep -qxF "$NVIDIA_CONF" /etc/modprobe.d/nvidia.conf || sudo echo "$NVIDIA_CONF" >> /etc/modprobe.d/nvidia.conf
+sudo touch /etc/modprobe.d/nvidia.conf
+grep -qxF "$NVIDIA_CONF" /etc/modprobe.d/nvidia.conf || echo "$NVIDIA_CONF" | sudo tee --append /etc/modprobe.d/nvidia.conf
 
 # Symling Hyprland config
 rm -rf $CONFIG_PATH/hypr
