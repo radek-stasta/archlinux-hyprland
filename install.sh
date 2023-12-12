@@ -14,7 +14,7 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 sudo pacman -Syyu --noconfirm
 
 # Install pacman packages
-sudo pacman -S kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers github-cli firefox --noconfirm
+sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers github-cli firefox pavucontrol rofi-lbonn-wayland --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
