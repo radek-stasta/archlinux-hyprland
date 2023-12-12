@@ -13,10 +13,10 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 # System update
 sudo pacman -Syyu --noconfirm
 
-### Hyprland ###
-# Install Hyprland
-sudo pacman -S hyprland-git nvidia-dkms qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers --noconfirm
+# Install pacman packages
+sudo pacman -S kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers github-cli firefox --noconfirm
 
+### Hyprland and NVIDIA ###
 # Set GRUB parameters
 NVIDIA_GRUB="nvidia_drm.modeset=1"
 grep -q "$NVIDIA_GRUB" /etc/default/grub || sudo sed -i "s/quiet/quiet $NVIDIA_GRUB/" /etc/default/grub
@@ -35,6 +35,4 @@ grep -qxF "$NVIDIA_CONF" /etc/modprobe.d/nvidia.conf || echo "$NVIDIA_CONF" | su
 # Symling Hyprland config
 rm -rf $CONFIG_PATH/hypr
 ln -sf $DOTFILES/hypr $CONFIG_PATH/hypr
-
-# Install pacman packages
-sudo pacman -S kitty --noconfirm
+### Hyprland and NVIDIA ###
