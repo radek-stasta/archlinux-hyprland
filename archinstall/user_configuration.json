@@ -1,0 +1,170 @@
+{
+    "additional-repositories": [
+        "multilib"
+    ],
+    "archinstall-language": "English",
+    "audio_config": {
+        "audio": "pulseaudio"
+    },
+    "bootloader": "Grub",
+    "config_version": "2.7.1",
+    "debug": false,
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/sda",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "Boot",
+                            "ESP"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "3f13b5af-a6f8-4363-8f65-5716998bf339",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 2048
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [
+                            {
+                                "compress": false,
+                                "mountpoint": "/",
+                                "name": "@",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/home",
+                                "name": "@home",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/var/log",
+                                "name": "@log",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/var/cache/pacman/pkg",
+                                "name": "@pkg",
+                                "nodatacow": false
+                            },
+                            {
+                                "compress": false,
+                                "mountpoint": "/.snapshots",
+                                "name": "@.snapshots",
+                                "nodatacow": false
+                            }
+                        ],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "btrfs",
+                        "mount_options": [
+                            "compress=zstd"
+                        ],
+                        "mountpoint": null,
+                        "obj_id": "88697660-44ae-4e7c-b2b8-cf6e17578786",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 255487639552
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 2049
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "disk_encryption": null,
+    "hostname": "archlinux",
+    "kernels": [
+        "linux",
+        "linux-zen"
+    ],
+    "locale_config": {
+        "kb_layout": "cz-qwertz",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "custom_mirrors": [],
+        "mirror_regions": {
+            "Czechia": [
+                "https://mirrors.nic.cz/archlinux/$repo/os/$arch",
+                "https://mirror.dkm.cz/archlinux/$repo/os/$arch",
+                "https://gluttony.sin.cvut.cz/arch/$repo/os/$arch",
+                "https://ftp.sh.cvut.cz/arch/$repo/os/$arch",
+                "https://europe.mirror.pkgbuild.com/$repo/os/$arch",
+                "http://mirrors.nic.cz/archlinux/$repo/os/$arch",
+                "http://mirror.vpsfree.cz/archlinux/$repo/os/$arch",
+                "http://mirror.dkm.cz/archlinux/$repo/os/$arch",
+                "http://gluttony.sin.cvut.cz/arch/$repo/os/$arch",
+                "http://ftp.sh.cvut.cz/arch/$repo/os/$arch",
+                "http://ftp.linux.cz/pub/linux/arch/$repo/os/$arch",
+                "http://ftp.fi.muni.cz/pub/linux/arch/$repo/os/$arch"
+            ]
+        }
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "no_pkg_lookups": false,
+    "ntp": true,
+    "offline": false,
+    "packages": [
+        "git"
+    ],
+    "parallel downloads": 0,
+    "profile_config": {
+        "gfx_driver": null,
+        "greeter": null,
+        "profile": {
+            "custom_settings": {},
+            "details": [],
+            "main": "Minimal"
+        }
+    },
+    "script": "guided",
+    "silent": false,
+    "skip_ntp": false,
+    "skip_version_check": false,
+    "swap": true,
+    "timezone": "Europe/Prague",
+    "uki": false,
+    "version": "2.7.1"
+}
