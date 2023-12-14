@@ -14,7 +14,9 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 sudo pacman -Syyu --noconfirm
 
 # Install pacman packages
-sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts network-manager-applet --noconfirm
+sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
+linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
+network-manager-applet mc ntfs-3g steam brightnessctl --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -40,3 +42,15 @@ ln -sf $DOTFILES/hypr $CONFIG_PATH/hypr
 # Waybar
 rm -rf $CONFIG_PATH/waybar
 ln -sf $DOTFILES/waybar $CONFIG_PATH/waybar
+
+# Lutris and dependencies
+sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
+mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
+lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo \
+sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
+ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 \
+lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader lib32-vkd3d \
+vkd3d python-protobuf vulkan-tools lutris --noconfirm
+
+# Set user groups
+sudo usermod -aG video rstasta
