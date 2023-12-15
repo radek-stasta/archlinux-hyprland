@@ -16,7 +16,8 @@ sudo pacman -Syyu --noconfirm
 # Install pacman packages
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
-network-manager-applet mc ntfs-3g steam brightnessctl --noconfirm
+network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
+xdg-desktop-portal-hyprland xdg-desktop-portal-gtk --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -53,4 +54,7 @@ lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader l
 vkd3d python-protobuf vulkan-tools lutris --noconfirm
 
 # Set user groups
-sudo usermod -aG video rstasta
+sudo usermod -aG video,docker rstasta
+
+# Enable services
+sudo systemctl enable docker
