@@ -17,7 +17,7 @@ sudo pacman -Syyu --noconfirm
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
 network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
-xdg-desktop-portal-hyprland xdg-desktop-portal-gtk --noconfirm
+xdg-desktop-portal-hyprland xdg-desktop-portal-gtk fish --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -53,8 +53,17 @@ ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-li
 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader lib32-vkd3d \
 vkd3d python-protobuf vulkan-tools lutris --noconfirm
 
+# Oh My Fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install
+chmod +x install
+./install --noninteractive
+rm install
+
 # Set user groups
 sudo usermod -aG video,docker rstasta
+
+# Change shell
+chsh -s $(which fish)
 
 # Enable services
 sudo systemctl enable docker
