@@ -14,14 +14,14 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 sudo pacman -Syyu --noconfirm
 
 # Install fish and change shell
-sudo pacman -S fish noconfirm
+sudo pacman -S fish --noconfirm
 sudo chsh -s $(which fish) rstasta
 
 # Install pacman packages
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
 network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
-xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi --noconfirm
+xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -68,3 +68,5 @@ sudo usermod -aG video,docker rstasta
 
 # Enable services
 sudo systemctl enable docker
+sudo systemctl enable cronie
+sudo systemctl enable grub-btrfsd
