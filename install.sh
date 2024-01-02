@@ -20,8 +20,9 @@ sudo chsh -s $(which fish) rstasta
 # Install pacman packages
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
-network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
-xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent --noconfirm
+ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
+xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
+protonup-qt parsec-bin subversion zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -48,6 +49,10 @@ ln -sf $DOTFILES/hypr $CONFIG_PATH/hypr
 rm -rf $CONFIG_PATH/waybar
 ln -sf $DOTFILES/waybar $CONFIG_PATH/waybar
 
+# Rofi
+rm -rf $CONFIG_PATH/rofi
+ln -sf $DOTFILES/rofi $CONFIG_PATH/rofi
+
 # Lutris and dependencies
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
@@ -70,3 +75,5 @@ sudo usermod -aG video,docker rstasta
 sudo systemctl enable docker
 sudo systemctl enable cronie
 sudo systemctl enable grub-btrfsd
+sudo systemctl enable cups
+sudo systemctl enable avahi-daemon
