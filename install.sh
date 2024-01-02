@@ -23,7 +23,7 @@ linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar
 ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
 protonup-qt parsec-bin subversion zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh dolphin dolphin-plugins \
-breeze godot --noconfirm
+breeze godot hyprpaper --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -53,6 +53,10 @@ ln -sf $DOTFILES/waybar $CONFIG_PATH/waybar
 # Rofi
 rm -rf $CONFIG_PATH/rofi
 ln -sf $DOTFILES/rofi $CONFIG_PATH/rofi
+
+# hyprpaper
+rm -rf $CONFIG_PATH/hyprpaper
+ln -sf $DOTFILES/hyprpaper $CONFIG_PATH/hyprpaper
 
 # Lutris and dependencies
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
