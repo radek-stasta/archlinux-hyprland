@@ -1,6 +1,16 @@
+@define-color background    #2E3440;
+@define-color highlight     #8FBCBB;
+@define-color font-light    #D8DEE9;
+@define-color red           #BF616A;
+@define-color orange        #D08770;
+@define-color yellow        #EBCB8B;
+@define-color green         #A3BE8C;
+@define-color purple        #B48EAD;
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Iosevka;
+    font-weight: bold;
     font-size: 13px;
 }
 
@@ -49,22 +59,18 @@ button:hover {
 
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    background-color: @background;
+    color: @font-light;
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
+#workspaces button.focused,
 #workspaces button.active {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: @highlight;
+    color: @background;
 }
 
 #workspaces button.urgent {
@@ -87,14 +93,20 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
-#tray,
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#mpd {
+#mpd,
+#mpris {
     padding: 0 10px;
     color: #ffffff;
     border-radius: 20px;
+}
+
+#tray {
+    padding: 0 10px;
+    background-color: @background;
+    color: #ffffff;
 }
 
 #window,
@@ -113,17 +125,18 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: @yellow;
+    color: @background;
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: @green;
+    color: @background;
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: @background;
+    background-color: @orange;
 }
 
 @keyframes blink {
@@ -134,8 +147,8 @@ button:hover {
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: @red;
+    color: @background;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -148,16 +161,18 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: @orange;
+    color: @background;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: @yellow;
+    color: @background;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: @green;
+    color: @background;
 }
 
 #backlight {
@@ -165,21 +180,28 @@ label:focus {
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: @purple;
+    color: @background;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    background-color: @red;
+    color: @background;
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+    background-color: @purple;
+    color: @background;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    background-color: @red;
+    color: @background;
+}
+
+#mpris {
+    background-color: @highlight;
+    color: @background;
 }
 
 #wireplumber {
@@ -206,15 +228,13 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: @highlight;
+    color: @background;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
+    background-color: @red;
+    color: @background;
 }
 
 #tray > .passive {
