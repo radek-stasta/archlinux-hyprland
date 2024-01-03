@@ -1,4 +1,4 @@
-hyprpaper & disown & sleep 1
+hyprpaper & disown & sleep 3
 wallpaper_dir="$HOME/.config/hyprpaper/wallpapers"
 files=($wallpaper_dir/*)
 random_file=("${files[RANDOM % ${#files[@]}]}")
