@@ -13,9 +13,11 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 # System update
 sudo pacman -Syyu --noconfirm
 
-# Install fish and change shell
+# Install fish, change shell and set fish theme
 sudo pacman -S fish --noconfirm
 sudo chsh -s $(which fish) rstasta
+yes | fish -c 'fish_config theme save "Nord"'
+ln -sf $DOTFILES/fish/config.fish $CONFIG_PATH/fish/config.fish
 
 # Install pacman packages
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
@@ -72,6 +74,7 @@ curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install 
 chmod +x install
 ./install --noninteractive
 rm install
+fish -c "omf install bobthefish"
 
 # Set user groups
 sudo usermod -aG video,docker rstasta
