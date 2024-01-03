@@ -64,6 +64,10 @@ ln -sf $DOTFILES/hyprpaper $CONFIG_PATH/hyprpaper
 rm -rf $CONFIG_PATH/dunst
 ln -sf $DOTFILES/dunst $CONFIG_PATH/dunst
 
+# Kitty
+rm -rf $CONFIG_PATH/kitty
+ln -sf $DOTFILES/kitty $CONFIG_PATH/kitty
+
 # Lutris and dependencies
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
