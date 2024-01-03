@@ -86,7 +86,16 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%d.%m.%Y}",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "format": {
+                "months": "<span color='#EBCB8B'><b>{}</b></span>",
+                "weekdays": "<span color='#A3BE8C'><b>{}</b></span>",
+                "today": "<span color='#BF616A'><b>{}</b></span>"
+            }
+        }
     },
     "cpu": {
         "format": " {usage}%",

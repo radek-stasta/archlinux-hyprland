@@ -13,6 +13,11 @@ grep -qxF "[chaotic-aur]" /etc/pacman.conf || echo -e "$CHAOTIC_MIRROR" | sudo t
 # System update
 sudo pacman -Syyu --noconfirm
 
+# Add Czech locale and regenerate
+CZECH_LOCALE="cs_CZ.UTF-8 UTF-8"
+grep -qxF "$CZECH_LOCALE" /etc/locale.gen || echo -e "$CZECH_LOCALE" | sudo tee --append /etc/locale.gen
+sudo locale-gen
+
 # Install fish, change shell and set fish theme
 sudo pacman -S fish --noconfirm
 sudo chsh -s $(which fish) rstasta
