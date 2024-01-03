@@ -30,7 +30,7 @@ linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar
 ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin hyprshot \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
 protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh dolphin dolphin-plugins \
-breeze godot hyprpaper spotify --noconfirm
+breeze godot hyprpaper spotify swaylock-effects --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
