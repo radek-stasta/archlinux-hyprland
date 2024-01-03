@@ -166,7 +166,7 @@
             "playing": "",
             "stopped": ""
         },
-        "dynamic-len": 80
+        "dynamic-len": 60
     },
     "custom/media": {
         "format": "{icon} {}",
