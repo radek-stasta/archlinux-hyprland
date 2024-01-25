@@ -1,18 +1,17 @@
-(defpoll trendingFile :interval "5s"
-  `cat steam_trending.txt`)
+(defpoll steamFile :interval "5s"
+  `cat steam_charts.txt`)
 
-(defwindow trending
+(defwindow steam
   :monitor 0
   :stacking "bg"
   :windowtype "desktop"
   :geometry (geometry
-    :height "100%"
     :x "10px"
     :y "10px")
-  (trendingWidget))
+  (steamWidget))
 
-(defwidget trendingWidget []
-  (box :class "trending-box" :valign "start"
-    (label :markup trendingFile)
+(defwidget steamWidget []
+  (box :class "main-box"
+    (label :markup steamFile)
   )
 )
