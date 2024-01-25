@@ -1,4 +1,4 @@
-(defpoll steamFile :interval "5s"
+(defpoll steamFile :interval "60s"
   `cat steam_charts.txt`)
 
 (defwindow steam
