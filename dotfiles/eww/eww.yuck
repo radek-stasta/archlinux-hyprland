@@ -6,9 +6,13 @@
   :stacking "bg"
   :windowtype "desktop"
   :geometry (geometry
-    :width "30%"
-    :height "100%")
+    :height "100%"
+    :x "10px"
+    :y "10px")
   (trendingWidget))
 
 (defwidget trendingWidget []
-  (label :markup trendingFile))
+  (box :class "trending-box" :valign "start"
+    (label :markup trendingFile)
+  )
+)

@@ -1,3 +1,4 @@
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -40,10 +41,21 @@ try:
 
     resultTrending = ""
     for game in games:
-        resultTrending += '<span weight="bold" size="large">' + game['name'] +  '</span>'
-        resultTrending += game['tag'] + ' | ' + game['price'] + ' | ' + game['release'] + ' | ' + game['rating'] + '\n'
+        ratingNumber = int(game['rating'].replace('%',''));
+        color = "#BF616A"
+        if (ratingNumber >= 50):
+            color = "#D08770"
+        if (ratingNumber >= 70):
+            color = "#EBCB8B"
+        if (ratingNumber >= 80):
+            color = "#8FBCBB"
+        if (ratingNumber >= 90):
+            color = "#A3BE8C"
+        resultTrending += '<span foreground="' + color + '" weight="bold" size="large">' + game['name'] +  '</span> '
+        
+        resultTrending += game['tag'] + ' | ' + game['price'] + ' | ' + game['release'] + '\n'
     
-    steamTrendingFile = open('steam_trending.txt', 'w+')
+    steamTrendingFile = open(os.path.expanduser('~') + '/.config/eww/steam_trending.txt', 'w+')
     steamTrendingFile.write(resultTrending)
     steamTrendingFile.close()
 
