@@ -30,7 +30,8 @@ linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar
 ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin grim slurp \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
 protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh dolphin dolphin-plugins \
-breeze godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop --noconfirm
+breeze godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww-wayland \
+python python-pipx --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -73,6 +74,10 @@ ln -sf $DOTFILES/dunst $CONFIG_PATH/dunst
 rm -rf $CONFIG_PATH/kitty
 ln -sf $DOTFILES/kitty $CONFIG_PATH/kitty
 
+# eww
+rm -rf $CONFIG_PATH/eww
+ln -sf $DOTFILES/eww $CONFIG_PATH/eww
+
 # Lutris and dependencies
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
@@ -88,6 +93,12 @@ chmod +x install
 ./install --noninteractive
 rm install
 fish -c "omf install bobthefish"
+
+# Install python modules
+python -m venv $HOME/.venv
+$HOME/.venv/bin/python -m pip install --upgrade pip
+$HOME/.venv/bin/python -m pip install bs4
+$HOME/.venv/bin/python -m pip install selenium
 
 # Set user groups
 sudo usermod -aG video,docker rstasta

@@ -1,0 +1,14 @@
+(defpoll trendingFile :interval "5s"
+  `cat steam_trending.txt`)
+
+(defwindow trending
+  :monitor 0
+  :stacking "bg"
+  :windowtype "desktop"
+  :geometry (geometry
+    :width "30%"
+    :height "100%")
+  (trendingWidget))
+
+(defwidget trendingWidget []
+  (label :markup trendingFile))
