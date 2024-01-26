@@ -24,6 +24,7 @@ try:
         gameDiv = rankingDiv.find("div", {"class": "appline"})
         if (gameDiv != None):
             name = gameDiv.find("span", {"class": "title"}).find("a").string
+            name = (name[:40] + '..') if len(name) > 40 else name
             tag = gameDiv.find("a", {"class": "tag"}).string
             
             price = 'Free'
@@ -74,6 +75,7 @@ try:
     i = 0
     for resultRow in resultRows:
         name = resultRow.find('span', {'class': 'title'}).string
+        name = (name[:40] + '..') if len(name) > 40 else name
         release = resultRow.find('div', {'class': 'search_released'}).string.strip().replace(',', '')
         reviews = resultRow.find('span', {'class': 'search_review_summary positive'})['data-tooltip-html']
         price = resultRow.find('div', {'class': 'discount_final_price'}).string
