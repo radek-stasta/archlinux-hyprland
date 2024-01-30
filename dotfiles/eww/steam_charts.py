@@ -38,7 +38,7 @@ try:
 
             games.append({'name': name, 'velocity': velocity, 'price': price, 'tag': tag, 'rating': rating});
             i = i + 1
-            if (i >= 20):
+            if (i >= 10):
                 break;
 
     now = datetime.now()
@@ -90,7 +90,7 @@ try:
         games.append(game)
 
         i = i + 1
-        if (i >= 20):
+        if (i >= 10):
             break
 
     now = datetime.now()
