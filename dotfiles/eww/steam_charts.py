@@ -82,7 +82,7 @@ try:
 
         reviewsSecondPart = reviews.split('<br>')[1]
         percentage = re.search(r'(\d+%)', reviewsSecondPart).group(1)
-        reviews = re.search(r'(\d+) user reviews', reviewsSecondPart).group(1)
+        reviews = re.search(r'([\d,]+) user reviews', reviewsSecondPart).group(1)
         reviews = f"{percentage} ({reviews} reviews)"
         percentage = int(percentage.replace('%',''))
 
