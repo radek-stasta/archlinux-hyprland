@@ -94,9 +94,6 @@ chmod +x install
 rm install
 fish -c "omf install bobthefish"
 
-# Cronie
-crontab $PWD/scripts/cronie_user.conf
-
 # Install python modules
 python -m venv $HOME/.venv
 $HOME/.venv/bin/python -m pip install --upgrade pip

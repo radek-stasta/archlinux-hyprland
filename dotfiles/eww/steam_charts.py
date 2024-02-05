@@ -1,122 +1,138 @@
 import os
-import re
 from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 
 try:
-    #TRENDING
-    options = Options()
-    options.add_argument('--no-sandbox')
-    options.add_argument("--headless=new")
-    options.add_argument("--disable-dev-shm-usage")
-    driver = webdriver.Chrome(options=options)
-    driver.get("https://steam250.com/trending")
-    bs = BeautifulSoup(driver.page_source, "html.parser")
-
-    rankingMainDiv = bs.find("div", {"class": "col1 main ranking"})
-    rankingDivs = rankingMainDiv.find_all(attrs={'id': True})
-    games = []
-    i = 0
-    for rankingDiv in rankingDivs:
-        gameDiv = rankingDiv.find("div", {"class": "appline"})
-        if (gameDiv != None):
-            name = gameDiv.find("span", {"class": "title"}).find("a").string
-            name = (name[:40] + '..') if len(name) > 40 else name
-            tag = gameDiv.find("a", {"class": "tag"}).string
-            
-            price = 'Free'
-            try:
-                price = gameDiv.find("span", {"class": "price"}).string
-            except:
-                pass
-
-            rating = rankingDiv.find("span", {"class": "rating"}).string.replace("rated ", "")
-            velocity = rankingDiv.find("span", {"class": "velocity"}).get_text(strip=True).replace("velocity", "")
-
-            games.append({'name': name, 'velocity': velocity, 'price': price, 'tag': tag, 'rating': rating});
-            i = i + 1
-            if (i >= 10):
-                break;
-
-    now = datetime.now()
-
-    resultTrending = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded" rise="10pt">STEAM TRENDING (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
-    for game in games:
-        ratingNumber = int(game['rating'].replace('%',''))
-        color = "#BF616A"
-        if (ratingNumber >= 50):
-            color = "#D08770"
-        if (ratingNumber >= 70):
-            color = "#EBCB8B"
-        if (ratingNumber >= 80):
-            color = "#8FBCBB"
-        if (ratingNumber >= 90):
-            color = "#A3BE8C"
-        resultTrending += '<span foreground="' + color + '" weight="bold" size="large">' + game['name'] +  '</span> '
-        
-        resultTrending += game['tag'] + ' | ' + game['price'] + ' | ' + game['velocity'] + '\n'
-
     #NEW
     options = Options()
     options.add_argument('--no-sandbox')
-    options.add_argument("--headless=new")
-    options.add_argument("--disable-dev-shm-usage")
+    #options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
-    driver.get("https://store.steampowered.com/search/?sort_by=Released_DESC&category1=998&os=win&supportedlang=english&filter=popularnew&ndl=1")
+    driver.get("https://steamdb.info/")
     bs = BeautifulSoup(driver.page_source, "html.parser")
 
-    resultsDiv = bs.find('div', {'id': 'search_resultsRows'})
-    resultRows = resultsDiv.find_all('a', {'class': 'search_result_row'})
-   
-    games = []
-    i = 0
-    for resultRow in resultRows:
-        name = resultRow.find('span', {'class': 'title'}).string
-        name = (name[:40] + '..') if len(name) > 40 else name
-        release = resultRow.find('div', {'class': 'search_released'}).string.strip().replace(',', '')
-        reviews = resultRow.find('span', {'class': 'search_review_summary positive'})['data-tooltip-html']
-        price = resultRow.find('div', {'class': 'discount_final_price'}).string
+    productsContainer = bs.find("div", {"class": "container-products"})
+    productsRows = productsContainer.find_all("div", {"class": "row"})
+    
+    tablePopularReleases = productsRows[1].find("table", {"class": "table-products"})
+    appRows = tablePopularReleases.find_all("tr", {"class": "app"})
 
-        reviewsSecondPart = reviews.split('<br>')[1]
-        percentage = re.search(r'(\d+%)', reviewsSecondPart).group(1)
-        reviews = re.search(r'([\d,]+) user reviews', reviewsSecondPart).group(1)
-        reviews = f"{percentage} ({reviews} reviews)"
-        percentage = int(percentage.replace('%',''))
+    new = []
 
-        game = {'name': name, 'release': release, 'reviews': reviews, 'percentage': percentage, 'price': price}
-        games.append(game)
-
-        i = i + 1
-        if (i >= 10):
-            break
-
+    for app in appRows:
+        columns = app.find_all("td")
+        name = columns[1].find("a", {"class": "css-truncate"}).get_text(strip=True)
+        name = (name[:30] + '..') if len(name) > 30 else name
+        peak = columns[2].get_text()
+        price = columns[3].get_text()
+        gameInfo = {"name": name, "peak": peak, "price": price}
+        new.append(gameInfo)
+    
     now = datetime.now()
-
-    resultNew = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded" rise="10pt">STEAM NEW (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
-    for game in games:
-        ratingNumber = game['percentage']
+    steamNew = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">NEW (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
+    steamNew += '<span size="xx-small">\n</span>'
+    for game in new:
+        # color games based on peak
+        peak = int(game['peak'].replace(',', ''))
         color = "#BF616A"
-        if (ratingNumber >= 50):
-            color = "#D08770"
-        if (ratingNumber >= 70):
-            color = "#EBCB8B"
-        if (ratingNumber >= 80):
-            color = "#8FBCBB"
-        if (ratingNumber >= 90):
+        if (peak >= 20000):
             color = "#A3BE8C"
-        resultNew += '<span foreground="' + color + '" weight="bold" size="large">' + game['name'] +  '</span> '
-        resultNew += game['reviews'] + ' | ' + game['price'] + '\n'
+        elif (peak >= 10000):
+            color = "#8FBCBB"
+        elif (peak >= 5000):
+            color = "#EBCB8B"
+        elif (peak >= 1000):
+            color = "#D08770"
+        steamNew += '<span weight="bold" foreground="' + color + '">' + game['name'] + '</span>'
+        steamNew += '<span foreground="' + color + '"> | ' + game['peak'] + '</span>\n'
+
+    outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_new.txt', 'w+')
+    outputFile.write(steamNew)
+    outputFile.close()
+
+    #UPCOMING
+    driver.get("https://steamdb.info/upcoming/?nosmall")
+    bs = BeautifulSoup(driver.page_source, "html.parser")
+
+    body = bs.find("div", {"class": "body-content"})
+    releasesContainer = body.find("div", {"class": "container"}, recursive=False)
+
+    releases = []
+
+    # Get first 10 dates
+    dates = releasesContainer.find_all("div", {"class": "pre-table-title"})
+    releasesIndex = 0
     
-    result = resultTrending
-    result += '\n'
-    result += resultNew
+    for date in dates:
+        dateText = date.find("a").find_all(string=True, recursive=False)[-1].strip()
+        dateObject = datetime.strptime(dateText, '%d %B %Y')
+        formattedDate = dateObject.strftime('%d.%m.%Y')
+        releases.append({"date": formattedDate, "games": []})
+        releasesIndex = releasesIndex + 1;
+        if releasesIndex >= 20:
+            break;
     
-    steamTrendingFile = open(os.path.expanduser('~') + '/.config/eww/steam_charts.txt', 'w+')
-    steamTrendingFile.write(result)
-    steamTrendingFile.close()
+    # Assign first 10 game lists to dates
+    games = releasesContainer.find_all("div", {"class": "dataTables_wrapper"})
+    releasesIndex = 0
+
+    for game in games:
+        appRows = game.find_all("tr", {"class": "app"})
+        for app in appRows:
+            gameInfo = {}
+            name = app.find('a', {"class": "b"}).get_text(strip=True)
+            name = (name[:30] + '..') if len(name) > 30 else name
+            followers = app.find('td', {"class": "text-center"}).get_text(strip=True)            
+            gameInfo = {"name": name, "followers": followers}
+            releases[releasesIndex]["games"].append(gameInfo)
+        
+        # sort games by number of followers
+        releases[releasesIndex]["games"] = sorted(releases[releasesIndex]["games"], key=lambda x: int(x['followers'].replace(',', '')), reverse=True)
+
+        releasesIndex = releasesIndex + 1;
+        if releasesIndex >= 20:
+            break;
+    
+    releasesIndex = 0
+    totalGamesPrinted = 0 # limit to 15 games
+
+    # Print upcoming releases
+    steamUpcoming = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">UPCOMING (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
+    for releaseDay in releases:
+        # Check if at least one game have more than 1000 followers
+        if int(releaseDay['games'][0]['followers'].replace(',', '')) >= 1000:
+            steamUpcoming += '<span size="xx-small">\n</span>'
+            steamUpcoming += '<span size="large" weight="bold" foreground="#EBCB8B">' + releaseDay['date'] + '</span>\n'
+            for gameRelease in releaseDay['games']:
+                followers = int(gameRelease['followers'].replace(',', ''))
+                if followers >= 1000:
+                    # color games based on followers
+                    color = "#BF616A"
+                    if (followers >= 20000):
+                        color = "#A3BE8C"
+                    elif (followers >= 10000):
+                        color = "#8FBCBB"
+                    elif (followers >= 5000):
+                        color = "#D08770"
+                    
+                    steamUpcoming += '<span weight="bold" foreground="' + color + '">' + gameRelease['name'] + '</span>'
+                    steamUpcoming += '<span foreground="' + color + '"> | ' + gameRelease['followers'] + '</span>\n'
+                    
+                    # limit to 15 printed games
+                    totalGamesPrinted = totalGamesPrinted + 1
+                    if totalGamesPrinted >= 15:
+                        releasesIndex = 10
+                        break;
+            
+        releasesIndex = releasesIndex + 1;
+        if releasesIndex >= 10:
+            break;
+    
+    outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_upcoming.txt', 'w+')
+    outputFile.write(steamUpcoming)
+    outputFile.close()
 
 finally:
     try:
