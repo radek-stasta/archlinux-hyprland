@@ -4,6 +4,12 @@
 (defpoll steamUpcoming :interval "60s"
   `cat steam_upcoming.txt`)
 
+(defpoll steamTrending :interval "60s"
+  `cat steam_trending.txt`)
+
+(defpoll steamUpdated :interval "60s"
+  `cat steam_updated.txt`)
+
 (defwindow steam
   :monitor 0
   :stacking "bg"
@@ -16,32 +22,43 @@
 
 (defwidget steamWidget []
   (box 
-    :class "main-box" 
-    :orientation "vertical" 
+    :class "main-box"
+    :orientation "horizontal"
     :space-evenly false
-    :spacing 10
-      (box
-        :class "steam-new"
-        :hexpand true
-          (label 
-            :markup steamNew
-          )
-      )
-      (box
-        :class "steam-upcoming"
-        :hexpand true
-          (label
-            :markup steamUpcoming
-          )
-      )
+    :spacing 10 
       (box 
-        :space-evenly false 
-        :hexpand true 
-        :halign "center"
-          (button
-            :onclick "~/.venv/bin/python ~/.config/eww/steam_charts.py" 
-            :timeout "5000ms" 
-            ""
+        :orientation "vertical" 
+        :spacing 10
+          (box
+            :class "steam-trending"
+              (label 
+                :markup steamTrending
+              )
+          )
+          (box
+            :class "steam-new"
+              (label
+                :markup steamNew
+              )
+          )
+      )
+      (box
+        :orientation "vertical"
+        :space-evenly false
+        :spacing 10
+          (box
+            :class "steam-upcoming"
+              (label
+                :markup steamUpcoming
+              )
+          )
+          (box
+            :halign "center"
+              (button
+                :onclick "~/.venv/bin/python ~/.config/eww/steam_charts.py" 
+                :timeout "5000ms" 
+                ""
+              )    
           )
       )
   )

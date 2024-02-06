@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 try:
-    #NEW
+    # NEW
     options = Options()
     options.add_argument('--no-sandbox')
     #options.add_argument("--headless=new")
@@ -31,17 +31,17 @@ try:
         new.append(gameInfo)
     
     now = datetime.now()
-    steamNew = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">NEW (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
+    steamNew = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">NEW</span>\n'
     steamNew += '<span size="xx-small">\n</span>'
     for game in new:
         # color games based on peak
         peak = int(game['peak'].replace(',', ''))
         color = "#BF616A"
-        if (peak >= 20000):
+        if (peak >= 10000):
             color = "#A3BE8C"
-        elif (peak >= 10000):
-            color = "#8FBCBB"
         elif (peak >= 5000):
+            color = "#8FBCBB"
+        elif (peak >= 3000):
             color = "#EBCB8B"
         elif (peak >= 1000):
             color = "#D08770"
@@ -52,7 +52,51 @@ try:
     outputFile.write(steamNew)
     outputFile.close()
 
-    #UPCOMING
+    # TRENDING
+    firstRowTables = productsRows[0].find_all("table", {"class": "table-products"})
+    tableTrending = firstRowTables[1]
+    appRows = tableTrending.find_all("tr", {"class": "app"})
+
+    trendig = []
+
+    for app in appRows:
+        columns = app.find_all("td")
+        name = columns[1].find("a", {"class": "css-truncate"}).get_text(strip=True)
+        name = (name[:30] + '..') if len(name) > 30 else name
+        
+        try:
+            players = columns[3].get_text()
+        except:
+            players = "0"
+        
+        gameInfo = {"name": name, "players": players}
+        trendig.append(gameInfo)
+    
+    # Sort by players
+    trendig = sorted(trendig, key=lambda x: int(x['players'].replace(',', '')), reverse=True)
+
+    steamTrending = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">TRENDING</span>\n'
+    steamTrending += '<span size="xx-small">\n</span>'
+    for game in trendig:
+        # color games based on peak
+        players = int(game['players'].replace(',', ''))
+        color = "#BF616A"
+        if (players >= 10000):
+            color = "#A3BE8C"
+        elif (players >= 5000):
+            color = "#8FBCBB"
+        elif (players >= 3000):
+            color = "#EBCB8B"
+        elif (players >= 1000):
+            color = "#D08770"
+        steamTrending += '<span weight="bold" foreground="' + color + '">' + game['name'] + '</span>'
+        steamTrending += '<span foreground="' + color + '"> | ' + game['players'] + '</span>\n'
+
+    outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_trending.txt', 'w+')
+    outputFile.write(steamTrending)
+    outputFile.close()
+
+    # UPCOMING
     driver.get("https://steamdb.info/upcoming/?nosmall")
     bs = BeautifulSoup(driver.page_source, "html.parser")
 
@@ -99,7 +143,7 @@ try:
     totalGamesPrinted = 0 # limit to 15 games
 
     # Print upcoming releases
-    steamUpcoming = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">UPCOMING (' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>\n'
+    steamUpcoming = '<span size="large" weight="bold" foreground="#B48EAD" stretch="expanded">UPCOMING</span>\n'
     for releaseDay in releases:
         # Check if at least one game have more than 1000 followers
         if int(releaseDay['games'][0]['followers'].replace(',', '')) >= 1000:
@@ -110,11 +154,11 @@ try:
                 if followers >= 1000:
                     # color games based on followers
                     color = "#BF616A"
-                    if (followers >= 20000):
+                    if (followers >= 10000):
                         color = "#A3BE8C"
-                    elif (followers >= 10000):
-                        color = "#8FBCBB"
                     elif (followers >= 5000):
+                        color = "#8FBCBB"
+                    elif (followers >= 3000):
                         color = "#D08770"
                     
                     steamUpcoming += '<span weight="bold" foreground="' + color + '">' + gameRelease['name'] + '</span>'
@@ -129,6 +173,10 @@ try:
         releasesIndex = releasesIndex + 1;
         if releasesIndex >= 10:
             break;
+    
+    now = datetime.now()
+    steamUpcoming += '<span size="xx-small">\n</span>'
+    steamUpcoming += '<span foreground="#B48EAD">(' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>'
     
     outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_upcoming.txt', 'w+')
     outputFile.write(steamUpcoming)
