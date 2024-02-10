@@ -49,7 +49,7 @@ try:
         steamNew += '<span foreground="' + color + '"> | ' + game['peak'] + '</span>\n'
 
     outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_new.txt', 'w+')
-    outputFile.write(steamNew)
+    outputFile.write(steamNew.replace('&', '&amp;'))
     outputFile.close()
 
     # TRENDING
@@ -93,7 +93,7 @@ try:
         steamTrending += '<span foreground="' + color + '"> | ' + game['players'] + '</span>\n'
 
     outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_trending.txt', 'w+')
-    outputFile.write(steamTrending)
+    outputFile.write(steamTrending.replace('&', '&amp;'))
     outputFile.close()
 
     # UPCOMING
@@ -179,7 +179,7 @@ try:
     steamUpcoming += '<span foreground="#B48EAD">(' + now.strftime("%d.%m.%Y %H:%M:%S") + ')</span>'
     
     outputFile = open(os.path.expanduser('~') + '/.config/eww/steam_upcoming.txt', 'w+')
-    outputFile.write(steamUpcoming)
+    outputFile.write(steamUpcoming.replace('&', '&amp;'))
     outputFile.close()
 
 finally:
