@@ -55,6 +55,7 @@
           (box
             :halign "center"
               (button
+                :class "steam-refresh-button"
                 :onclick "~/.venv/bin/python ~/.config/eww/steam_charts.py" 
                 :timeout "5000ms" 
                 ""
