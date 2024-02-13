@@ -29,8 +29,8 @@ sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
 ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin grim slurp \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
-protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh dolphin dolphin-plugins \
-breeze godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww-wayland \
+protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh nautilus  \
+godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww-wayland \
 python python-pipx --noconfirm
 
 ### Hyprland and NVIDIA ###
@@ -102,6 +102,9 @@ $HOME/.venv/bin/python -m pip install selenium
 
 # Set user groups
 sudo usermod -aG video,docker rstasta
+
+# Set Gnome appliaction to prefer dark theme
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 
 # Enable services
 sudo systemctl enable docker
