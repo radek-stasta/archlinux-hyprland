@@ -148,16 +148,18 @@ try:
         # Check if at least one game have more than 1000 followers
         if int(releaseDay['games'][0]['followers'].replace(',', '')) >= 1000:
             steamUpcoming += '<span size="xx-small">\n</span>'
-            steamUpcoming += '<span size="large" weight="bold" foreground="#EBCB8B">' + releaseDay['date'] + '</span>\n'
+            steamUpcoming += '<span size="large" weight="bold" foreground="#B48EAD">' + releaseDay['date'] + '</span>\n'
             for gameRelease in releaseDay['games']:
                 followers = int(gameRelease['followers'].replace(',', ''))
                 if followers >= 1000:
                     # color games based on followers
                     color = "#BF616A"
-                    if (followers >= 10000):
+                    if (followers >= 20000):
                         color = "#A3BE8C"
-                    elif (followers >= 5000):
+                    elif (followers >= 10000):
                         color = "#8FBCBB"
+                    elif (followers >= 5000):
+                        color = "#EBCB8B"
                     elif (followers >= 3000):
                         color = "#D08770"
                     
