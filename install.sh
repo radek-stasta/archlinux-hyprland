@@ -29,9 +29,12 @@ sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland waybar dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
 ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin grim slurp \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
-protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh nautilus  \
+protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh nautilus nordzy-icon-theme-git \
 godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww-wayland \
 python python-pipx --noconfirm
+
+# Install yay packages
+yay -S nordzy-cursors --noconfirm
 
 ### Hyprland and NVIDIA ###
 # Set GRUB parameters
@@ -78,6 +81,10 @@ ln -sf $DOTFILES/kitty $CONFIG_PATH/kitty
 rm -rf $CONFIG_PATH/eww
 ln -sf $DOTFILES/eww $CONFIG_PATH/eww
 
+# Cursor
+rm -rf $HOME/.icons
+ln -sf $DOTFILES/icons $HOME/.icons
+
 # Lutris and dependencies
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
@@ -103,8 +110,10 @@ $HOME/.venv/bin/python -m pip install selenium
 # Set user groups
 sudo usermod -aG video,docker rstasta
 
-# Set Gnome appliaction to prefer dark theme
+# Set Gnome specific properties
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.desktop.interface cursor-theme Nordzy-cursors
+gsettings set org.gnome.desktop.interface icon-theme Nordzy
 
 # Enable services
 sudo systemctl enable docker
