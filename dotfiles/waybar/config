@@ -9,7 +9,7 @@
     "modules-left": ["hyprland/workspaces", "cpu", "memory", "disk", "network", "temperature"],
     "modules-center": ["hyprland/window"],
     // "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpris", "pulseaudio", "battery", "clock", "hyprland/language", "tray"],
+    "modules-right": ["mpris", "pulseaudio", "battery", "hyprland/language", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
