@@ -9,7 +9,7 @@
     "modules-left": ["hyprland/workspaces", "cpu", "memory", "disk", "network", "temperature"],
     "modules-center": ["hyprland/window"],
     // "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpris", "pulseaudio", "battery", "clock", "tray"],
+    "modules-right": ["mpris", "pulseaudio", "battery", "clock", "hyprland/language", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -35,6 +35,12 @@
             "locked": "",
             "unlocked": ""
         }
+    },
+    "hyprland/language": {
+        "format": "{}",
+        "format-cs": "cz",
+        "format-en": "en",
+        "keyboard-name": "corsair-corsair-gaming-k55-rgb-keyboard"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
