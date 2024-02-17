@@ -40,7 +40,8 @@
         "format": "{}",
         "format-cs": "CZ",
         "format-en": "US",
-        "keyboard-name": "corsair-corsair-gaming-k55-rgb-keyboard"
+        //"keyboard-name": "corsair-corsair-gaming-k55-rgb-keyboard"
+	"keyboard-name": "at-translated-set-2-keyboard"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -144,7 +145,7 @@
         "bat": "BAT2"
     },
     "network": {
-        "interval": 5,
+        "interval": 2,
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         //"format-wifi": "{essid} ({signalStrength}%) ",
         "format-wifi": " {bandwidthDownBytes}",

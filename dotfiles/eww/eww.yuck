@@ -1,3 +1,122 @@
+;; TOP BAR WINDOW
+(defwindow topbar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :height "30px"
+    :width "100%"
+    :anchor "top center"
+  )
+  :exclusive true
+  (topbar)
+)
+
+;; TOP BAR WINDOW poll variables
+(defpoll cpuPercentage 
+  :interval "2s"
+  `echo " "$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%"`)
+(defpoll netSpeed 
+  :interval "2s"
+  '~/.venv/bin/python ~/.config/eww/network_speed.py'
+)
+(defpoll activeWindow 
+  :interval "2s"
+  'hyprctl activewindow -j | jq -r ".title"'
+)
+(defpoll datetime
+  :interval "2s"
+  'date "+%d.%m %H:%M"'
+)
+(defpoll soundInfo
+  :interval "1s"
+  '~/.venv/bin/python ~/.config/eww/sound_info.py'
+)
+
+;; TOP BAR WINDOW main topbar container
+(defwidget topbar []
+  (centerbox
+    :class "topbar"
+    (box
+      :space-evenly false
+      :spacing 5
+      (topbarBox 
+        :data cpuPercentage
+        :bg-color "#D08770")
+      (topbarBox
+        :data ' ${round(EWW_RAM.used_mem / 1000000000, 1)}GiB'
+        :bg-color "#EBCB8B")
+      (topbarBox 
+        :data ' ${round(EWW_DISK["/"].free / 1000000000, 1)}GiB'
+        :bg-color "#A3BE8C")
+      (topbarBox 
+        :data netSpeed
+        :bg-color "#B48EAD")
+      (topbarBox 
+        :data ' ${EWW_TEMPS["ACPITZ_TEMP1"]}°C'
+        :bg-color "#8FBCBB")
+    )
+    (label
+      :markup activeWindow
+    )
+    (box
+      :space-evenly false
+      :spacing 5
+      :halign "end"
+      (topbarBox
+        :data soundInfo
+        :bg-color "#B48EAD"
+      )
+      (topbarBox
+        :data '${EWW_BATTERY["BAT1"].capacity < 10 ? " ${EWW_BATTERY["BAT1"].capacity}" : 
+                 EWW_BATTERY["BAT1"].capacity < 30 ? " ${EWW_BATTERY["BAT1"].capacity}" :
+                 EWW_BATTERY["BAT1"].capacity < 50 ? " ${EWW_BATTERY["BAT1"].capacity}" :
+                 EWW_BATTERY["BAT1"].capacity < 75 ? " ${EWW_BATTERY["BAT1"].capacity}" :
+                 " ${EWW_BATTERY["BAT1"].capacity}"
+                }%${EWW_BATTERY["BAT1"].status == "Charging" ? " " : 
+                    EWW_BATTERY["BAT1"].status == "Discharging" ? " 󰂍" :
+                    " "
+                }'
+        :bg-color "#A3BE8C"
+      )
+      (topbarBox
+        :data datetime
+        :bg-color "#EBCB8B"
+      )
+    )
+  )
+)
+
+;; TOP BAR WINDOW box container
+(defwidget topbarBox [data bg-color]
+  (box
+    :class "topbar-box"
+    :style "background-color: ${bg-color}"
+    (topbarInfoText
+      :data data)
+  )
+)
+
+;; TOP BAR WINDOW data label displaying corresponding variable
+(defwidget topbarInfoText [data]
+  (label
+    :markup data
+    :wrap true
+  )
+)
+
+;; STEAM WINDOW
+(defwindow steam
+  :monitor 0
+  :stacking "bg"
+  :windowtype "desktop"
+  :geometry (geometry
+    :x "10px"
+    :y "10px"
+  )
+  (steamWidget)
+)
+
 (defpoll steamNew :interval "60s"
   `cat steam_new.txt`)
 
@@ -10,19 +129,8 @@
 (defpoll steamUpdated :interval "60s"
   `cat steam_updated.txt`)
 
-(defwindow steam
-  :monitor 0
-  :stacking "bg"
-  :windowtype "desktop"
-  :geometry (geometry
-    :x "10px"
-    :y "10px")
-    (steamWidget)
-)
-
 (defwidget steamWidget []
   (box 
-    :class "main-box"
     :orientation "horizontal"
     :space-evenly false
     :spacing 10 
