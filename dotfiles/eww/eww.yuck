@@ -9,7 +9,8 @@
     :anchor "top center"
   )
   :exclusive true
-  (topbar)
+  (topbar
+    :windowId 0)
 )
 
 (defwindow topbar1
@@ -22,7 +23,8 @@
     :anchor "top center"
   )
   :exclusive true
-  (topbar)
+  (topbar
+    :windowId 1)
 )
 
 (defwindow topbar2
@@ -35,7 +37,8 @@
     :anchor "top center"
   )
   :exclusive true
-  (topbar)
+  (topbar
+    :windowId 2)
 )
 
 ;; TOP BAR WINDOW poll variables
@@ -58,14 +61,28 @@
   :interval "1s"
   '~/.venv/bin/python ~/.config/eww/sound_info.py'
 )
+(defpoll workspaces0
+  :interval "1s"
+  '~/.venv/bin/python ~/.config/eww/workspaces.py 0'
+)
+(defpoll workspaces1
+  :interval "1s"
+  '~/.venv/bin/python ~/.config/eww/workspaces.py 1'
+)
+(defpoll workspaces2
+  :interval "1s"
+  '~/.venv/bin/python ~/.config/eww/workspaces.py 2'
+)
 
 ;; TOP BAR WINDOW main topbar container
-(defwidget topbar []
+(defwidget topbar [windowId]
   (centerbox
     :class "topbar"
     (box
       :space-evenly false
       :spacing 5
+      (workspaces
+        :windowId windowId)
       (topbarBox 
         :data cpuPercentage
         :bg-color "#D08770")
@@ -113,6 +130,14 @@
   )
 )
 
+;; TOP BAR WINDOW workspaces0
+(defwidget workspaces [windowId]
+  (literal :content '${windowId == 0 ? workspaces0 : 
+                       windowId == 1 ? workspaces1 : 
+                       workspaces2}'
+  )
+)
+
 ;; TOP BAR WINDOW box container
 (defwidget topbarBox [data bg-color]
   (box
@@ -127,7 +152,6 @@
 (defwidget topbarInfoText [data]
   (label
     :markup data
-    :wrap true
   )
 )
 
