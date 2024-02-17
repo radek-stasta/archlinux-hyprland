@@ -1,6 +1,32 @@
 ;; TOP BAR WINDOW
-(defwindow topbar
+(defwindow topbar0
   :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :height "30px"
+    :width "100%"
+    :anchor "top center"
+  )
+  :exclusive true
+  (topbar)
+)
+
+(defwindow topbar1
+  :monitor 1
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :height "30px"
+    :width "100%"
+    :anchor "top center"
+  )
+  :exclusive true
+  (topbar)
+)
+
+(defwindow topbar2
+  :monitor 2
   :geometry (geometry
     :x "0px"
     :y "0px"
