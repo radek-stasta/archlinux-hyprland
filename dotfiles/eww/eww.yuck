@@ -61,6 +61,10 @@
   :interval "1s"
   '~/.venv/bin/python ~/.config/eww/sound_info.py'
 )
+(defpoll media
+  :interval "2s"
+  '~/.venv/bin/python ~/.config/eww/media_playerctl.py'
+)
 (defpoll workspaces0
   :interval "1s"
   '~/.venv/bin/python ~/.config/eww/workspaces.py 0'
@@ -106,6 +110,10 @@
       :space-evenly false
       :spacing 5
       :halign "end"
+      (topbarBox
+        :data media
+        :bg-color "#8FBCBB"
+      )
       (topbarBox
         :data soundInfo
         :bg-color "#B48EAD"

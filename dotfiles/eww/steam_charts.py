@@ -166,9 +166,9 @@ try:
                     steamUpcoming += '<span weight="bold" foreground="' + color + '">' + gameRelease['name'] + '</span>'
                     steamUpcoming += '<span foreground="' + color + '"> | ' + gameRelease['followers'] + '</span>\n'
                     
-                    # limit to 15 printed games
+                    # limit to 20 printed games
                     totalGamesPrinted = totalGamesPrinted + 1
-                    if totalGamesPrinted >= 15:
+                    if totalGamesPrinted >= 20:
                         releasesIndex = 10
                         break;
             
