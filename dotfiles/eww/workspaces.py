@@ -22,16 +22,22 @@ cmd = 'hyprctl workspaces'
 data = run(cmd, capture_output=True, shell=True)
 workspacesLines = data.stdout.splitlines()
 
+workspacesIds = []
 workspaceButtons = ''
 
 previousLine = ''
 for line in workspacesLines:
     decodedLine = line.decode('utf-8').strip()
     if f'monitorID: {windowId}' in decodedLine:
+        # Add id to generated ids for monitor
         match = re.search(r'ID (\d+)', previousLine)
         workspacesId = match.group(1)
-        workspaceButtons += generateWorkspaceButton(workspacesId, activeWorkspaceId)
+        workspacesIds.append(workspacesId)        
 
     previousLine = decodedLine
+
+workspacesIds.sort()
+for id in workspacesIds:
+    workspaceButtons += generateWorkspaceButton(id, activeWorkspaceId)
 
 print(f'(box :vexpand true {workspaceButtons})')
