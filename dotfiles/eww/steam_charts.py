@@ -119,7 +119,7 @@ try:
             break;
     
     # Assign first 10 game lists to dates
-    games = releasesContainer.find_all("div", {"class": "dataTables_wrapper"})
+    games = releasesContainer.find_all("div", {"class": "dataTable_table_wrap"})
     releasesIndex = 0
 
     for game in games:
