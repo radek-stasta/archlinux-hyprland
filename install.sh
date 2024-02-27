@@ -27,11 +27,11 @@ ln -sf $DOTFILES/fish/config.fish $CONFIG_PATH/fish/config.fish
 # Install pacman packages
 sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
 linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
-ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools visual-studio-code-bin grim slurp \
+ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools grim slurp \
 xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
 protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh nautilus nordzy-icon-theme-git \
-godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww-wayland \
-python python-pipx jq playerctl --noconfirm
+godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww \
+python python-pipx jq playerctl jre-openjdk webstorm nodejs-lts-hydrogen npm --noconfirm
 
 # Install yay packages
 yay -S nordzy-cursors --noconfirm
