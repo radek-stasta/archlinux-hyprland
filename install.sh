@@ -25,13 +25,86 @@ yes | fish -c 'fish_config theme save "Nord"'
 ln -sf $DOTFILES/fish/config.fish $CONFIG_PATH/fish/config.fish
 
 # Install pacman packages
-sudo pacman -S neovim kitty hyprland-git nvidia-dkms nvidia-settings qt5-wayland qt5ct libva libva-nvidia-driver-git linux-headers \
-linux-zen-headers github-cli google-chrome pavucontrol rofi-lbonn-wayland dunst ttf-font-awesome ttf-arimo-nerd noto-fonts \
-ttf-iosevka network-manager-applet mc ntfs-3g steam brightnessctl docker docker-compose wireguard-tools grim slurp \
-xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kodi btrfs-assistant snapper cronie snap-pac grub-btrfs snap-pac-grub polkit-kde-agent \
-protonup-qt parsec-bin subversion kdesvn zip unzip cups cups-pdf avahi nss-mdns yay gimp vlc libreoffice-fresh nautilus nordzy-icon-theme-git \
-godot hyprpaper spotify swaylock-effects wl-clipboard pipewire wireplumber xwaylandvideobridge remmina freerdp htop eww \
-python python-pipx jq playerctl jre-openjdk webstorm nodejs-lts-hydrogen npm --noconfirm
+sudo pacman -S \
+  neovim                      `# console text editor` \
+  kitty                       `# terminal` \
+  hyprland-git                `# desktop environment` \
+  nvidia-dkms                 `# nvidia driver` \
+  nvidia-settings             `# nvidia settings` \
+  qt5-wayland                 `# needed for nvidia driver` \
+  qt5ct                       `# needed for nvidia driver` \
+  libva                       `# needed for nvidia driver` \
+  libva-nvidia-driver-git     `# needed for nvidia driver` \
+  linux-headers               `# kernel headers` \
+  linux-zen-headers           `# zen kernel headers` \
+  github-cli                  `# console app to connect to Github` \
+  google-chrome               `# Google Chrome browser` \
+  pavucontrol                 `# Pulse Audio control` \
+  rofi-lbonn-wayland          `# application launcher` \
+  dunst                       `# notification daemon` \
+  ttf-font-awesome            `# font for icons` \
+  ttf-arimo-nerd              `# font for icons` \
+  noto-fonts                  `# noto family font` \
+  ttf-iosevka                 `# Iosevka font` \
+  network-manager-applet      `# status bar applet for network manager` \
+  mc                          `# Midnight commander` \
+  ntfs-3g                     `# library for connecting to ntfs partition` \
+  steam                       `# Steam ` \
+  brightnessctl               `# library for controlling display brightness` \
+  docker                      `# Docker` \
+  docker-compose              `# Docker compose plugin` \
+  wireguard-tools             `# wireguard` \
+  grim                        `# screenshot utility` \
+  slurp                       `# library for selecting region for screenshots` \
+  xdg-desktop-portal-hyprland `# library for windows to communicate with each other` \
+  xdg-desktop-portal-gtk      `# library for windows to communicate with each other` \
+  kodi                        `# Kodi` \
+  btrfs-assistant             `# application to manage btrfs partitions` \
+  snapper                     `# library for btrfs snapshots` \
+  cronie                      `# library for automatic tasks` \
+  snap-pac                    `# pacman hooks for btrfs snapshots` \
+  grub-btrfs                  `# library for btrfs snapshots in grub` \
+  snap-pac-grub               `# library for btrfs snapshots in grub` \
+  polkit-kde-agent            `# library for password propagation to other apps` \
+  protonup-qt                 `# application to manage proton versions` \
+  parsec-bin                  `# Parsec` \
+  subversion                  `# Subversion` \
+  kdesvn                      `# graphical svn client` \
+  zip                         `# library for zipin files` \
+  unzip                       `# library for unziping files` \
+  cups                        `# library for printing` \
+  cups-pdf                    `# library for printing to pdf` \
+  avahi                       `# library needed for printing` \
+  nss-mdns                    `# library needed for printing` \
+  yay                         `# AUR helper` \
+  gimp                        `# Gimp` \
+  vlc                         `# VLC media player` \
+  libreoffice-fresh           `# Libre Office` \
+  nautilus                    `# nautilus file manager` \
+  nordzy-icon-theme-git       `# icon theme` \
+  godot                       `# Godot game engine` \
+  hyprpaper                   `# library for desktop wallpaper` \
+  spotify                     `# Spotify` \
+  swaylock-effects            `# library for lock screen` \
+  wl-clipboard                `# library for clipboard from different screens` \
+  pipewire                    `# multimedia framework needed for eww widgets` \
+  wireplumber                 `# library needed for pipewire and eww widgets` \
+  xwaylandvideobridge         `# library needed for streaming windows` \
+  remmina                     `# remote desktop client` \
+  freerdp                     `# library for rdp access in remmina` \
+  htop                        `# system monitor` \
+  eww                         `# Elkowars wacky widgets` \
+  python                      `# python` \
+  python-pipx                 `# python package manager` \
+  jq                          `# json parser for bash` \
+  playerctl                   `# library for media control in console` \
+  jre-openjdk                 `# Java JRE` \
+  webstorm                    `# Webstorm IDE` \
+  nodejs-lts-hydrogen         `# Node.js` \
+  npm                         `# npm for Node.js` \
+  firefox                     `# Firefox browser` \
+  nginx                       `# nginx server` \
+--noconfirm
 
 # Install yay packages
 yay -S nordzy-cursors --noconfirm
